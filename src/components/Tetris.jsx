@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { createStage, checkCollision } from "../gameHelpers";
+import { ThemeProvider } from "styled-components";
+import { themes } from "./styles/themes";
 
 // Components
 import Stage from "./Stage";
@@ -7,6 +9,11 @@ import Display from "./Display";
 import StartPauseButton from "./StartPauseButton";
 
 // Styled Components
+import {
+  StyledNextTetroStagePlacer,
+  StyledPocketTetroStagePlacer,
+} from "./styles/SingleTetroStage.styled";
+import SingleTetroStage from "./SingleTetroStage";
 import {
   StyledTetrisWrapper,
   StyledTetris,
@@ -18,13 +25,10 @@ import { usePlayer } from "../hooks/usePlayer";
 import { useStage } from "../hooks/useStage";
 import { useInterval } from "../hooks/useInterval";
 import { useGameStatus } from "../hooks/useGameStatus";
-import {
-  StyledNextTetroStagePlacer,
-  StyledPocketTetroStagePlacer,
-} from "./styles/SingleTetroStage.styled";
-import SingleTetroStage from "./SingleTetroStage";
+import { StyledButton } from "./styles/StartButton.styled";
 
 const Tetris = () => {
+  const [themeIndex, setThemeIndex] = useState(0);
   const [droptime, setDropTime] = useState(null);
   const [currentDropTime, setCurrentDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
@@ -155,52 +159,61 @@ const Tetris = () => {
     drop();
   }, droptime);
 
-  return (
-    <StyledTetrisWrapper
-      role="button"
-      tabIndex="0"
-      onKeyDown={(e) => move(e)}
-      onKeyUp={keyUp}
-    >
-      <StyledTetris>
-        <aside>
-          {gameStarted && !gameOver && (
-            <StyledPocketTetroStagePlacer>
-              <SingleTetroStage stage={pocketTetroStage} />
-              <StyledParagraph>Pocket tetromino</StyledParagraph>
-            </StyledPocketTetroStagePlacer>
-          )}
-        </aside>
-        <Stage stage={stage} />
-        <aside>
-          {gameOver && <Display gameOver={gameOver} text="GameOver" />}
-          {gameStarted && (
-            <div>
-              <Display text={`Score: ${score}`} />
-              <Display text={`Rows: ${rows}`} />
-              <Display text={`Level: ${level}`} />
-            </div>
-          )}
-          <StartPauseButton
-            gameOver={gameOver}
-            startGame={startGame}
-            gameStarted={gameStarted}
-            pauseGame={pauseGame}
-            unPauseGame={unPauseGame}
-            gamePaused={gamePaused}
-          />
+  const changeTheme = () => {
+    setThemeIndex((prevIndex) => (prevIndex + 1) % themes.length);
+  };
 
-          {gameStarted && !gameOver && (
-            <>
-              <StyledNextTetroStagePlacer>
-                <SingleTetroStage stage={nextTetroStage} />
-              </StyledNextTetroStagePlacer>
-              <StyledParagraph>upcoming tetromino</StyledParagraph>
-            </>
-          )}
-        </aside>
-      </StyledTetris>
-    </StyledTetrisWrapper>
+  return (
+    <>
+      <ThemeProvider theme={themes[themeIndex]}>
+        <StyledTetrisWrapper
+          role="button"
+          tabIndex="0"
+          onKeyDown={(e) => move(e)}
+          onKeyUp={keyUp}
+        >
+          <StyledTetris>
+            <aside>
+              {gameStarted && !gameOver && (
+                <StyledPocketTetroStagePlacer>
+                  <SingleTetroStage stage={pocketTetroStage} />
+                  <StyledParagraph>Pocket tetromino</StyledParagraph>
+                </StyledPocketTetroStagePlacer>
+              )}
+            </aside>
+            <Stage stage={stage} />
+            <aside>
+              {gameOver && <Display gameOver={gameOver} text="GameOver" />}
+              {gameStarted && (
+                <div>
+                  <Display text={`Score: ${score}`} />
+                  <Display text={`Rows: ${rows}`} />
+                  <Display text={`Level: ${level}`} />
+                </div>
+              )}
+              <StartPauseButton
+                gameOver={gameOver}
+                startGame={startGame}
+                gameStarted={gameStarted}
+                pauseGame={pauseGame}
+                unPauseGame={unPauseGame}
+                gamePaused={gamePaused}
+              />
+
+              {gameStarted && !gameOver && (
+                <>
+                  <StyledNextTetroStagePlacer>
+                    <SingleTetroStage stage={nextTetroStage} />
+                  </StyledNextTetroStagePlacer>
+                  <StyledParagraph>upcoming tetromino</StyledParagraph>
+                </>
+              )}
+              <StyledButton onClick={changeTheme}>Change Theme</StyledButton>
+            </aside>
+          </StyledTetris>
+        </StyledTetrisWrapper>
+      </ThemeProvider>
+    </>
   );
 };
 
