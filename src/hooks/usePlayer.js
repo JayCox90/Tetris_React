@@ -89,5 +89,6 @@ export const usePlayer = () => {
     pocketTetro,
     storePocketTetro,
     updatePocketTetro,
+    setPocketTetro,
   ];
 };

@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { createStage, checkCollision } from "../gameHelpers";
+import {
+  createStage,
+  checkCollision,
+  createSingleTetroStage,
+} from "../gameHelpers";
 import { ThemeProvider } from "styled-components";
 import { themes } from "./styles/themes";
 
@@ -18,6 +22,7 @@ import {
   StyledTetrisWrapper,
   StyledTetris,
   StyledParagraph,
+  StyledExplanation,
 } from "./styles/Tetris.styled";
 
 // Custom Hooks
@@ -44,10 +49,18 @@ const Tetris = () => {
     pocketTetro,
     storePocketTetro,
     updatePocketTetro,
+    setPocketTetro,
   ] = usePlayer();
 
-  const { stage, setStage, nextTetroStage, rowsCleared, pocketTetroStage } =
-    useStage(player, resetPlayer, nextTetro, pocketTetro);
+  const {
+    stage,
+    setStage,
+    nextTetroStage,
+    setNextTetroStage,
+    rowsCleared,
+    pocketTetroStage,
+    setPocketTetroStage,
+  } = useStage(player, resetPlayer, nextTetro, pocketTetro);
   const [score, setScore, rows, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
 
@@ -60,14 +73,17 @@ const Tetris = () => {
   const startGame = () => {
     // Reset eveything
     setStage(createStage());
+    setNextTetroStage(createSingleTetroStage());
+    setPocketTetroStage(createSingleTetroStage());
+    setPocketTetro(null);
     resetPlayer();
     setGameOver(false);
     setGamePaused(false);
-    setGameStarted(true);
     setDropTime(1000 / (level + 1) + 200);
     setScore(0);
     setRows(0);
     setLevel(1);
+    setGameStarted(true);
   };
 
   const pauseGame = () => {
@@ -178,6 +194,11 @@ const Tetris = () => {
                 <StyledPocketTetroStagePlacer>
                   <SingleTetroStage stage={pocketTetroStage} />
                   <StyledParagraph>Pocket tetromino</StyledParagraph>
+                  <StyledExplanation>Arrow keys for movement</StyledExplanation>
+                  <StyledExplanation>Space Key to drop</StyledExplanation>
+                  <StyledExplanation>
+                    S Key to pocket current Tetro
+                  </StyledExplanation>
                 </StyledPocketTetroStagePlacer>
               )}
             </aside>

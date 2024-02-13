@@ -1,8 +1,21 @@
-# React + Vite
+# React Tetris
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Based on this tutorial:     
+How to Build Tetris in React - GameDev Tutorial (with React Hooks!)
+https://www.youtube.com/watch?v=ZGOaCxX8HIU by 
+Thomas Weibenfalk 
 
-Currently, two official plugins are available:
+## Functionalities I added:
+- Upcoming Tetromino Stage 
+- Pocket Tetromino Stage and according Game Functionality
+- Pause / Continue Button
+- Instant Drop 
+- Theme Changer
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Next and potentially final touches:
+- More and prettier themes
+- Saving selected Theme in cookies/local storage for next time
+
+#### Maybe functionalities for later:
+- add Backend for Leader Board
+- Options to change controls and store in local storage or via User in Backend
