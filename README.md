@@ -13,7 +13,6 @@ Thomas Weibenfalk
 - Theme Changer
 
 ### Next and potentially final touches:
-- More and prettier themes
 - Saving selected Theme in cookies/local storage for next time
 
 #### Maybe functionalities for later:
