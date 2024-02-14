@@ -70,8 +70,6 @@ export const useStage = (player, resetPlayer, nextTetro, pocketTetro) => {
     const updatePocketTetroStage = () => {
       let newPocketTetroStage = createSingleTetroStage();
       if (pocketTetro !== null) {
-        console.log("calling ")
-        console.log( pocketTetro)
         newPocketTetroStage = pocketTetro.stage.map((row) =>
           row.map((cell) => [0, "clear"])
         );
@@ -85,7 +83,7 @@ export const useStage = (player, resetPlayer, nextTetro, pocketTetro) => {
     };
 
     setPocketTetroStage((prev) => updatePocketTetroStage(prev));
-  }, [player, resetPlayer, nextTetro, rowsCleared]);
+  }, [player, resetPlayer, nextTetro, pocketTetro, rowsCleared]);
 
   return {
     stage,

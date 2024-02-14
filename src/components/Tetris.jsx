@@ -140,8 +140,6 @@ const Tetris = () => {
   };
 
   const pocketPlayer = () => {
-    console.log("pocketcalled");
-    console.log(pocketTetro);
     if (pocketTetro) {
       updatePocketTetro();
     } else {

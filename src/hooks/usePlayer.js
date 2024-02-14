@@ -7,6 +7,7 @@ export const usePlayer = () => {
   const [player, setPlayer] = useState({
     pos: { x: 0, y: 0 },
     tetromino: TETROMINOS[0].shape,
+    id: TETROMINOS[0].id,
     collided: false,
   });
 
@@ -55,17 +56,16 @@ export const usePlayer = () => {
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-      // Here i could find the Tetromino from the next Tetromino
       tetromino: nextTetro.shape,
+      id: nextTetro.id,
       collided: false,
-      stage: nextTetro.stage,
     });
     getNextTetro();
   }, [nextTetro, getNextTetro]);
 
   // pocketTetro definition
   const storePocketTetro = () => {
-    setPocketTetro(player);
+    setPocketTetro(TETROMINOS[player.id]);
     resetPlayer();
   };
 
@@ -73,11 +73,12 @@ export const usePlayer = () => {
     const currentPlayer = JSON.parse(JSON.stringify(player));
     setPlayer({
       pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-      tetromino: pocketTetro.tetromino,
+      tetromino: pocketTetro.shape,
       collided: false,
+      id: pocketTetro.id,
       stage: pocketTetro.stage,
     });
-    setPocketTetro(currentPlayer);
+    setPocketTetro(TETROMINOS[currentPlayer.id]);
   };
 
   return [
