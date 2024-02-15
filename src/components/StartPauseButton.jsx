@@ -7,13 +7,17 @@ const StartPauseButton = ({
   unPauseGame,
   gamePaused,
   gameOver,
+  buttonRef,
 }) => {
   return (
     <>
       {!gameStarted || gameOver ? (
         <StyledButton onClick={startGame}>Start Game</StyledButton>
       ) : (
-        <StyledButton onClick={gamePaused ? unPauseGame : pauseGame}>
+        <StyledButton
+          onClick={gamePaused ? unPauseGame : pauseGame}
+          ref={buttonRef}
+        >
           {gamePaused ? "Continue" : "Pause Game"}
         </StyledButton>
       )}

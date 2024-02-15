@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   createStage,
   checkCollision,
@@ -34,6 +34,8 @@ import { StyledButton } from "./styles/StartButton.styled";
 
 const Tetris = () => {
   const [themeIndex, setThemeIndex] = useState(0);
+  const buttonRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [droptime, setDropTime] = useState(null);
   const [currentDropTime, setCurrentDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
@@ -90,12 +92,20 @@ const Tetris = () => {
     setCurrentDropTime(droptime);
     setDropTime(null);
     setGamePaused(true);
+    if (buttonRef.current) {
+      buttonRef.current.blur();
+      wrapperRef.current.focus();
+    }
   };
 
   const unPauseGame = () => {
     if (gamePaused) {
       setDropTime(currentDropTime);
       setGamePaused(false);
+      if (buttonRef.current) {
+        buttonRef.current.blur();
+        wrapperRef.current.focus();
+      }
     }
   };
 
@@ -148,7 +158,8 @@ const Tetris = () => {
   };
 
   const move = ({ keyCode }) => {
-    if (!gameOver && !gamePaused) {
+    // wrapperRef.current.focus();
+    if (!gameOver && !gamePaused && gameStarted && buttonRef.current) {
       if (keyCode === 37) {
         // left arrow key
         movePlayer(-1);
@@ -175,12 +186,17 @@ const Tetris = () => {
 
   const changeTheme = () => {
     setThemeIndex((prevIndex) => (prevIndex + 1) % themes.length);
+    if (buttonRef.current) {
+      buttonRef.current.blur();
+      wrapperRef.current.focus();
+    }
   };
 
   return (
     <>
       <ThemeProvider theme={themes[themeIndex]}>
         <StyledTetrisWrapper
+          ref={wrapperRef}
           role="button"
           tabIndex="0"
           onKeyDown={(e) => move(e)}
@@ -217,6 +233,7 @@ const Tetris = () => {
                 pauseGame={pauseGame}
                 unPauseGame={unPauseGame}
                 gamePaused={gamePaused}
+                buttonRef={buttonRef}
               />
 
               {gameStarted && !gameOver && (
@@ -227,7 +244,9 @@ const Tetris = () => {
                   <StyledParagraph>upcoming tetromino</StyledParagraph>
                 </>
               )}
-              <StyledButton onClick={changeTheme}>Change Theme</StyledButton>
+              <StyledButton ref={buttonRef} onClick={changeTheme}>
+                Change Theme
+              </StyledButton>
             </aside>
           </StyledTetris>
         </StyledTetrisWrapper>
