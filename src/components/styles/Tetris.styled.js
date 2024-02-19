@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SMALL_SCREEN_PX } from "../../gameHelpers";
 
 export const StyledTetrisWrapper = styled.div`
   width: 100vw;
@@ -11,9 +12,10 @@ export const StyledTetrisWrapper = styled.div`
 export const StyledTetris = styled.div`
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   padding: 40px;
   margin: 0 auto;
-  max-width: 45vw;
+  width: 75vw;
 
   aside {
     width: 100%;
@@ -55,4 +57,37 @@ export const StyledExplanation = styled.div`
   background: #000;
   font-family: Pixel, Arial, Helvetica, sans-serif;
   font-size: 0.8rem;
+`;
+
+export const StyledAside = styled.aside``;
+
+export const ColumnsStyling = styled.div`
+  display: block;
+  @media screen and (max-width: ${SMALL_SCREEN_PX}) {
+    display: none;
+  }
+`;
+
+export const RowStyling = styled.div`
+  display: none;
+
+  @media (max-width: ${SMALL_SCREEN_PX}) {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90vw;
+  }
+`;
+
+export const StyledTopRows = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 16vh;
+  margin: 10px 0px;
+`;
+
+export const StyledTopRow = styled.div`
+  max-height: auto;
+  display: flex;
+  justify-content: space-around;
 `;
