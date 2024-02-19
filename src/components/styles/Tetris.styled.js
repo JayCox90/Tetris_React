@@ -74,8 +74,7 @@ export const RowStyling = styled.div`
   @media (max-width: ${SMALL_SCREEN_PX}) {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    margin: auto;
+    margin: 0 auto;
     width: 90vw;
   }
 `;
@@ -83,6 +82,8 @@ export const RowStyling = styled.div`
 export const StyledTopRows = styled.div`
   display: flex;
   flex-direction: column;
+  height: 16vh;
+  margin: 10px 0px;
 `;
 
 export const StyledTopRow = styled.div`

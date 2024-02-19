@@ -36,6 +36,7 @@ import { useStage } from "../hooks/useStage";
 import { useInterval } from "../hooks/useInterval";
 import { useGameStatus } from "../hooks/useGameStatus";
 import { StyledButton } from "./styles/StartButton.styled";
+import { StagePlacer } from "./styles/Stage.styled";
 
 const Tetris = () => {
   const [themeIndex, setThemeIndex] = useState(0);
@@ -167,7 +168,6 @@ const Tetris = () => {
   };
 
   const move = ({ keyCode }) => {
-    // wrapperRef.current.focus();
     if (!gameOver && !gamePaused && gameStarted && buttonRef.current) {
       if (keyCode === 37) {
         // left arrow key
@@ -187,6 +187,23 @@ const Tetris = () => {
         pocketPlayer();
       }
     }
+  };
+
+  const handleDropClick = () => {
+    console.log("trigger dropclick");
+    dropDown();
+  };
+
+  const handleMoveLeftClick = () => {
+    movePlayer(-1);
+  };
+
+  const handleMoveRightClick = () => {
+    movePlayer(1);
+  };
+
+  const handleRotateClick = () => {
+    playerRotate(stage, 1);
   };
 
   useInterval(() => {
@@ -267,6 +284,7 @@ const Tetris = () => {
 
           {/* START OF ROW STYLING */}
           <RowStyling>
+            {/* Top Section */}
             <StyledTopRows>
               <StyledTopRow>
                 <StartPauseButton
@@ -285,36 +303,62 @@ const Tetris = () => {
               <StyledTopRow>
                 {gameStarted && !gameOver && (
                   <>
-                    <SingleTetroStage stage={pocketTetroStage} />
+                    <StyledNextTetroStagePlacer>
+                      <SingleTetroStage stage={pocketTetroStage} />
+                    </StyledNextTetroStagePlacer>
                   </>
                 )}
+                {/* Need to add the scoring widgets somewhere...  */}
+                {/* {gameStarted && (
+                  <>
+                    <Display text={`Score: ${score}`} />
+                    <Display text={`Rows: ${rows}`} />
+                    <Display text={`Level: ${level}`} />
+                  </>
+                )} */}
                 {gameStarted && !gameOver && (
                   <>
-                    <SingleTetroStage stage={nextTetroStage} />
+                    <StyledNextTetroStagePlacer>
+                      <SingleTetroStage stage={nextTetroStage} />
+                    </StyledNextTetroStagePlacer>
                   </>
                 )}
+                {gameOver && <Display gameOver={gameOver} text="GameOver" />}
               </StyledTopRow>
             </StyledTopRows>
-            <Stage stage={stage} />
-            <StyledAside>
-              {gameOver && <Display gameOver={gameOver} text="GameOver" />}
-              {gameStarted && (
-                <div>
-                  <Display text={`Score: ${score}`} />
-                  <Display text={`Rows: ${rows}`} />
-                  <Display text={`Level: ${level}`} />
-                </div>
-              )}
+            {/* / Top Section */}
+            {/* Middle Section */}
+            <StagePlacer>
+              <Stage stage={stage} />
+            </StagePlacer>
+            {/* / Middle Section */}
+            {/* Bottom Section */}
 
-              {gameStarted && !gameOver && (
+            <StyledTopRows>
+              {gameStarted && (
                 <>
-                  <StyledNextTetroStagePlacer>
-                    <SingleTetroStage stage={nextTetroStage} />
-                  </StyledNextTetroStagePlacer>
-                  <StyledParagraph>upcoming tetromino</StyledParagraph>
+                  <StyledTopRow>
+                    <Display text={"drop"} handleFunction={handleDropClick} />
+                    <Display text={"pocket"} handleFunction={pocketPlayer} />
+                    <Display text={"turn"} handleFunction={handleRotateClick} />
+                  </StyledTopRow>
+                  <StyledTopRow>
+                    {/* <Display text={`Score: ${score}`} />
+                  <Display text={`Rows: ${rows}`} />
+                <Display text={`Level: ${level}`} /> */}
+                    <Display
+                      text={"left"}
+                      handleFunction={handleMoveLeftClick}
+                    />
+                    <Display
+                      text={"right"}
+                      handleFunction={handleMoveRightClick}
+                    />
+                  </StyledTopRow>
                 </>
               )}
-            </StyledAside>
+            </StyledTopRows>
+            {/* / Bottom Section */}
           </RowStyling>
         </StyledTetrisWrapper>
       </ThemeProvider>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SMALL_SCREEN_PX, STAGE_HEIGHT, STAGE_WIDTH } from "../../gameHelpers";
 
 export const StyledStage = styled.div`
   display: grid;
@@ -13,4 +14,13 @@ export const StyledStage = styled.div`
   /* height: 100%; */
   /* max-width: 24vw; */
   background: #111;
+
+  @media (max-width: ${SMALL_SCREEN_PX}) {
+    aspect-ratio: calc(${STAGE_HEIGHT} / ${STAGE_WIDTH});
+  }
+`;
+
+export const StagePlacer = styled.div`
+  display: flex;
+  justify-content: center;
 `;

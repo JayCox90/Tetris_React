@@ -17,7 +17,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   @media (max-width: ${SMALL_SCREEN_PX}) {
     padding: 5px;
-    margin: 0;
+    margin: 0px 5px;
     max-height: 1vh;
   }
 `;
