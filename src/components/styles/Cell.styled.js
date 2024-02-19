@@ -14,7 +14,7 @@ export const StyledCell = styled.div`
   border-left-color: rgba(${(props) => props.theme[props.type]}, 0.3);
 
   @media (max-width: ${SMALL_SCREEN_PX}) {
-    height: calc(40vh / ${STAGE_HEIGHT});
+    height: calc(30vh / ${STAGE_HEIGHT});
     /* width: calc(50vw / ${STAGE_WIDTH}); */
   }
 `;

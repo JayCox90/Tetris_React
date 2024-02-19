@@ -19,5 +19,6 @@ export const StyledDisplay = styled.div`
   @media (max-width: ${SMALL_SCREEN_PX}) {
     justify-content: center;
     margin: 10px 2px 0px 2px;
+    padding: 10px;
   }
 `;
