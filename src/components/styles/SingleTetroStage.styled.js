@@ -24,8 +24,6 @@ export const StyledSingleTetroStage = styled.div`
   grid-gap: 1px;
   border: 2px solid #333;
   border-radius: 5px;
-  width: 75%;
-  max-width: 25vw;
   background: #111;
   margin: 15px 0 15px 0;
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SMALL_SCREEN_PX } from "../../gameHelpers";
 
 export const StyledButton = styled.button`
   box-sizing: border-box;
@@ -14,4 +15,9 @@ export const StyledButton = styled.button`
   font-size: 1rem;
   outline: none;
   cursor: pointer;
+  @media (max-width: ${SMALL_SCREEN_PX}) {
+    padding: 5px;
+    margin: 0;
+    max-height: 1vh;
+  }
 `;

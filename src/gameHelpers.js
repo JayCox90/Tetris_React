@@ -3,6 +3,8 @@ export const STAGE_HEIGHT = 20;
 export const NEXT_TETRO_STAGE_WIDTH = 4;
 export const NEXT_TETRO_STAGE_HEIGHT = 4;
 
+export const SMALL_SCREEN_PX = "768px";
+
 export const createStage = () =>
   Array.from(Array(STAGE_HEIGHT), () =>
     new Array(STAGE_WIDTH).fill([0, "clear"])

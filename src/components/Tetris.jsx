@@ -12,7 +12,7 @@ import Stage from "./Stage";
 import Display from "./Display";
 import StartPauseButton from "./StartPauseButton";
 
-// Styled Components
+//  Styled Components
 import {
   StyledNextTetroStagePlacer,
   StyledPocketTetroStagePlacer,
@@ -23,6 +23,11 @@ import {
   StyledTetris,
   StyledParagraph,
   StyledExplanation,
+  StyledAside,
+  ColumnsStyling,
+  RowStyling,
+  StyledTopRow,
+  StyledTopRows,
 } from "./styles/Tetris.styled";
 
 // Custom Hooks
@@ -86,6 +91,10 @@ const Tetris = () => {
     setRows(0);
     setLevel(1);
     setGameStarted(true);
+    if (buttonRef.current) {
+      buttonRef.current.blur();
+      wrapperRef.current.focus();
+    }
   };
 
   const pauseGame = () => {
@@ -202,22 +211,92 @@ const Tetris = () => {
           onKeyDown={(e) => move(e)}
           onKeyUp={keyUp}
         >
-          <StyledTetris>
-            <aside>
-              {gameStarted && !gameOver && (
-                <StyledPocketTetroStagePlacer>
-                  <SingleTetroStage stage={pocketTetroStage} />
-                  <StyledParagraph>Pocket tetromino</StyledParagraph>
-                  <StyledExplanation>Arrow keys for movement</StyledExplanation>
-                  <StyledExplanation>Space Key to drop</StyledExplanation>
-                  <StyledExplanation>
-                    S Key to pocket current Tetro
-                  </StyledExplanation>
-                </StyledPocketTetroStagePlacer>
-              )}
-            </aside>
+          {/* <>Columns</> */}
+          <ColumnsStyling>
+            <StyledTetris>
+              <StyledAside>
+                {gameStarted && !gameOver && (
+                  <StyledPocketTetroStagePlacer>
+                    <SingleTetroStage stage={pocketTetroStage} />
+                    <StyledParagraph>Pocket tetromino</StyledParagraph>
+                    <StyledExplanation>
+                      Arrow keys for movement
+                    </StyledExplanation>
+                    <StyledExplanation>Space Key to drop</StyledExplanation>
+                    <StyledExplanation>
+                      S Key to pocket current Tetro
+                    </StyledExplanation>
+                  </StyledPocketTetroStagePlacer>
+                )}
+              </StyledAside>
+              <Stage stage={stage} />
+              <StyledAside>
+                {gameOver && <Display gameOver={gameOver} text="GameOver" />}
+                {gameStarted && (
+                  <div>
+                    <Display text={`Score: ${score}`} />
+                    <Display text={`Rows: ${rows}`} />
+                    <Display text={`Level: ${level}`} />
+                  </div>
+                )}
+                <StartPauseButton
+                  gameOver={gameOver}
+                  startGame={startGame}
+                  gameStarted={gameStarted}
+                  pauseGame={pauseGame}
+                  unPauseGame={unPauseGame}
+                  gamePaused={gamePaused}
+                  buttonRef={buttonRef}
+                />
+
+                {gameStarted && !gameOver && (
+                  <>
+                    <StyledNextTetroStagePlacer>
+                      <SingleTetroStage stage={nextTetroStage} />
+                    </StyledNextTetroStagePlacer>
+                    <StyledParagraph>upcoming tetromino</StyledParagraph>
+                  </>
+                )}
+                <StyledButton ref={buttonRef} onClick={changeTheme}>
+                  Change Theme
+                </StyledButton>
+              </StyledAside>
+            </StyledTetris>
+          </ColumnsStyling>
+          {/* END OF COLUMN STYLING */}
+
+          {/* START OF ROW STYLING */}
+          <RowStyling>
+            <StyledTopRows>
+              <StyledTopRow>
+                <StartPauseButton
+                  gameOver={gameOver}
+                  startGame={startGame}
+                  gameStarted={gameStarted}
+                  pauseGame={pauseGame}
+                  unPauseGame={unPauseGame}
+                  gamePaused={gamePaused}
+                  buttonRef={buttonRef}
+                />
+                <StyledButton ref={buttonRef} onClick={changeTheme}>
+                  Change Theme
+                </StyledButton>
+              </StyledTopRow>
+              <StyledTopRow>
+                {gameStarted && !gameOver && (
+                  <>
+                    <SingleTetroStage stage={pocketTetroStage} />
+                  </>
+                )}
+                {gameStarted && !gameOver && (
+                  <>
+                    <SingleTetroStage stage={nextTetroStage} />
+                  </>
+                )}
+              </StyledTopRow>
+            </StyledTopRows>
             <Stage stage={stage} />
-            <aside>
+            <StyledAside>
               {gameOver && <Display gameOver={gameOver} text="GameOver" />}
               {gameStarted && (
                 <div>
@@ -226,15 +305,6 @@ const Tetris = () => {
                   <Display text={`Level: ${level}`} />
                 </div>
               )}
-              <StartPauseButton
-                gameOver={gameOver}
-                startGame={startGame}
-                gameStarted={gameStarted}
-                pauseGame={pauseGame}
-                unPauseGame={unPauseGame}
-                gamePaused={gamePaused}
-                buttonRef={buttonRef}
-              />
 
               {gameStarted && !gameOver && (
                 <>
@@ -244,11 +314,8 @@ const Tetris = () => {
                   <StyledParagraph>upcoming tetromino</StyledParagraph>
                 </>
               )}
-              <StyledButton ref={buttonRef} onClick={changeTheme}>
-                Change Theme
-              </StyledButton>
-            </aside>
-          </StyledTetris>
+            </StyledAside>
+          </RowStyling>
         </StyledTetrisWrapper>
       </ThemeProvider>
     </>
