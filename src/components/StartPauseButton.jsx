@@ -1,5 +1,4 @@
 import { StyledButton } from "./styles/StartButton.styled";
-//gameStarted={gameStarted} pauseGame={pauseGame} unPauseGame={unPauseGame} gamePaused={gamePaused}
 const StartPauseButton = ({
   startGame,
   gameStarted,

@@ -26,8 +26,8 @@ import {
   StyledAside,
   ColumnsStyling,
   RowStyling,
-  StyledTopRow,
-  StyledTopRows,
+  StyledMainRows,
+  StyledRow,
 } from "./styles/Tetris.styled";
 
 // Custom Hooks
@@ -190,7 +190,6 @@ const Tetris = () => {
   };
 
   const handleDropClick = () => {
-    console.log("trigger dropclick");
     dropDown();
   };
 
@@ -285,8 +284,8 @@ const Tetris = () => {
           {/* START OF ROW STYLING */}
           <RowStyling>
             {/* Top Section */}
-            <StyledTopRows>
-              <StyledTopRow>
+            <StyledMainRows>
+              <StyledRow>
                 <StartPauseButton
                   gameOver={gameOver}
                   startGame={startGame}
@@ -299,8 +298,8 @@ const Tetris = () => {
                 <StyledButton ref={buttonRef} onClick={changeTheme}>
                   Change Theme
                 </StyledButton>
-              </StyledTopRow>
-              <StyledTopRow>
+              </StyledRow>
+              <StyledRow>
                 {gameStarted && !gameOver && (
                   <>
                     <StyledNextTetroStagePlacer>
@@ -308,7 +307,7 @@ const Tetris = () => {
                     </StyledNextTetroStagePlacer>
                   </>
                 )}
-                {/* Need to add the scoring widgets somewhere...  */}
+                {/* Could add the scoring widgets somewhere here, but screen is already very cluttered...  */}
                 {/* {gameStarted && (
                   <>
                     <Display text={`Score: ${score}`} />
@@ -324,8 +323,8 @@ const Tetris = () => {
                   </>
                 )}
                 {gameOver && <Display gameOver={gameOver} text="GameOver" />}
-              </StyledTopRow>
-            </StyledTopRows>
+              </StyledRow>
+            </StyledMainRows>
             {/* / Top Section */}
             {/* Middle Section */}
             <StagePlacer>
@@ -334,18 +333,15 @@ const Tetris = () => {
             {/* / Middle Section */}
             {/* Bottom Section */}
 
-            <StyledTopRows>
+            <StyledMainRows>
               {gameStarted && (
                 <>
-                  <StyledTopRow>
+                  <StyledRow>
                     <Display text={"drop"} handleFunction={handleDropClick} />
                     <Display text={"pocket"} handleFunction={pocketPlayer} />
                     <Display text={"turn"} handleFunction={handleRotateClick} />
-                  </StyledTopRow>
-                  <StyledTopRow>
-                    {/* <Display text={`Score: ${score}`} />
-                  <Display text={`Rows: ${rows}`} />
-                <Display text={`Level: ${level}`} /> */}
+                  </StyledRow>
+                  <StyledRow>
                     <Display
                       text={"left"}
                       handleFunction={handleMoveLeftClick}
@@ -354,10 +350,10 @@ const Tetris = () => {
                       text={"right"}
                       handleFunction={handleMoveRightClick}
                     />
-                  </StyledTopRow>
+                  </StyledRow>
                 </>
               )}
-            </StyledTopRows>
+            </StyledMainRows>
             {/* / Bottom Section */}
           </RowStyling>
         </StyledTetrisWrapper>

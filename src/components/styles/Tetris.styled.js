@@ -79,14 +79,14 @@ export const RowStyling = styled.div`
   }
 `;
 
-export const StyledTopRows = styled.div`
+export const StyledMainRows = styled.div`
   display: flex;
   flex-direction: column;
   height: 16vh;
   margin: 10px 0px;
 `;
 
-export const StyledTopRow = styled.div`
+export const StyledRow = styled.div`
   max-height: auto;
   display: flex;
   justify-content: space-around;
