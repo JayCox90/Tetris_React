@@ -21,3 +21,8 @@ Game works best in Browsers, but has mobile Design as well
 - Saving selected Theme in cookies/local storage for next time
 - add Backend for Leader Board
 - Options to change controls and store in local storage or via User in Backend
+
+
+The performance on the mobile design is a bit funky, depending on device, but since this is not really meant to be played, I am putting investigation on optimizations on hold. Also mobile styling could use a bit more work as well as implementation of the scoring, but for now I will leave it as is. 
+
+I hope you enjoy. I spent more time playing this game than I am going to admit. 

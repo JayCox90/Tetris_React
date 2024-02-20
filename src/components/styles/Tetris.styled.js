@@ -82,12 +82,19 @@ export const RowStyling = styled.div`
 export const StyledMainRows = styled.div`
   display: flex;
   flex-direction: column;
-  height: 16vh;
+  /* height: auto; */
   margin: 10px 0px;
 `;
 
 export const StyledRow = styled.div`
-  max-height: auto;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+`;
+export const StyledRowStages = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  align-items: center;
+  height: 10vh;
 `;

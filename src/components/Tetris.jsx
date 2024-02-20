@@ -28,6 +28,7 @@ import {
   RowStyling,
   StyledMainRows,
   StyledRow,
+  StyledRowStages,
 } from "./styles/Tetris.styled";
 
 // Custom Hooks
@@ -299,7 +300,7 @@ const Tetris = () => {
                   Change Theme
                 </StyledButton>
               </StyledRow>
-              <StyledRow>
+              <StyledRowStages>
                 {gameStarted && !gameOver && (
                   <>
                     <StyledNextTetroStagePlacer>
@@ -323,7 +324,7 @@ const Tetris = () => {
                   </>
                 )}
                 {gameOver && <Display gameOver={gameOver} text="GameOver" />}
-              </StyledRow>
+              </StyledRowStages>
             </StyledMainRows>
             {/* / Top Section */}
             {/* Middle Section */}

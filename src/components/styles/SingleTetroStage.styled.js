@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SMALL_SCREEN_PX } from "../../gameHelpers";
 
 export const StyledPocketTetroStagePlacer = styled.div`
   display: flex;
@@ -12,6 +13,11 @@ export const StyledNextTetroStagePlacer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: ${SMALL_SCREEN_PX}) {
+    height: 10vh;
+    width: 40%;
+  }
 `;
 
 export const StyledSingleTetroStage = styled.div`
