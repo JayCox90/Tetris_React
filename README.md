@@ -6,6 +6,7 @@ https://www.youtube.com/watch?v=ZGOaCxX8HIU by
 Thomas Weibenfalk 
     
 Game works best in Browsers, but has mobile Design as well
+Try it here: https://jaycox90.github.io/Tetris_React/
 
 ## Functionalities I added:
 - Upcoming Tetromino Stage 
